@@ -1,0 +1,17 @@
+{
+  "name": "comment-keeper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager ./ --icon=./icon.icns --prune=true --overwrite CommentKeeper"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-packager": "^14.2.1"
+  }
+}

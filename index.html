@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Comment Keeper</title>
+		<link rel="stylesheet" type="text/css" href="./index.css"/>
+	</head>
+
+	<body>
+		
+		<div id="title-bar" class="drag-window">
+			<div id="title-bar-content">
+				Comment Keeper
+			</div>
+		</div>
+		
+		<div id="body-container">
+		
+			<div id="project-folder-container">
+				<div id="project-folder-label-div">
+					<p id="project-folder-label">
+						Project Folder:
+					</p>
+				</div>
+				<input id="project-folder-input" readonly="true">
+					<div id="project-folder-browse-div">
+						<button id="project-folder-browse">
+							Browse
+						</button>
+					</div>
+					<div id="project-folder-refresh-div">
+						<button id="project-folder-refresh">
+							Refresh
+						</button>
+					</div>
+				</input>
+			</div>
+			
+			<div id="comment-tree-div">
+				
+				<ul id="comment-tree-ul">
+				</ul>
+				
+			</div>
+			
+			<div id="comment-tree-no-comments-note">
+					
+				No comments found! :)
+				
+			</div>
+			
+			<div id="invalid-project-folder-note">
+				
+				Project Folder value is invalid
+				
+			</div>
+		
+		</div>
+		
+		<script src="./app.js"></script>
+	</body>
+
+</html>
