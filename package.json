@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager ./ --icon=./icon.icns --prune=true --overwrite CommentKeeper"
+    "build": "electron-packager ./ --out=./build --icon=./icon.icns --prune=true --overwrite CommentKeeper"
   },
   "author": "",
   "license": "ISC",
