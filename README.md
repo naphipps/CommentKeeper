@@ -1,1 +1,1 @@
-![](https://github.com/naphipps/CommentKeeper/raw/master/img/demo.png)
+![](https://github.com/naphipps/CommentKeeper/raw/main/img/demo.png)
