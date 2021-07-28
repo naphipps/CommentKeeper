@@ -99,8 +99,8 @@
         record.li.id = line
         record.li.setAttribute('line-num', record.line_num)
         line_num_div.classList.add('line-num')
-        line_num_div.innerHTML = record.line_num
-        comment_code.innerHTML = record.comment
+        line_num_div.innerText = record.line_num
+        comment_code.innerText = record.comment
         
         record.li.appendChild(line_num_div)
         record.li.appendChild(comment_code)
@@ -144,14 +144,25 @@
             }
         }
         
+        function createId(path_array, index) 
+        {
+            var id = []
+            for (var i=index; i>=0; i--)
+            {
+                id.push(path_array[i])
+            }
+            
+            return id.join("-")
+        }
+        
         for (var i=0; i<record.path_array.length; i++)
         {
-            if (document.getElementById(record.path_array[i]))
+            var path_id = createId(record.path_array, i);
+            
+            if (document.getElementById(path_id))
             {
                 continue
             }
-            
-            var path_id = record.path_array[i]
             
             var li = document.createElement('li')
             var div = document.createElement('div')
@@ -160,7 +171,7 @@
             li.id = path_id + '-li'
             ul.id = path_id
             ul.classList.add('nested')
-            div.innerHTML = path_id
+            div.innerText = record.path_array[i]
             div.classList.add('caret')
             div.addEventListener("click", function() 
             {
@@ -177,11 +188,11 @@
             }
             else
             {
-                sortedInsert(document.getElementById(record.path_array[i-1]), li)
+                sortedInsert(document.getElementById(createId(record.path_array, i-1)), li)
             }
         }
         
-        sortedInsert(document.getElementById(record.path_array[record.path_array.length-1]), record.li, true)
+        sortedInsert(document.getElementById(createId(record.path_array, record.path_array.length-1)), record.li, true)
     }
     
     function removeFromTree(line)
