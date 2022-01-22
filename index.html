@@ -1,65 +1,28 @@
 <!DOCTYPE html>
-
+<!--
+//##===----------------------------------------------------------------------===##//
+//
+//  Author: Nathan Phipps 12/7/20
+//
+//##===----------------------------------------------------------------------===##//
+-->
 <html>
-
 	<head>
-		<meta charset="UTF-8"/>
+		<meta charset="UTF-8" />
 		<title>Comment Keeper</title>
-		<link rel="stylesheet" type="text/css" href="./index.css"/>
+		<link rel="stylesheet" type="text/css" href="./index.css" />
 	</head>
-
 	<body>
-		
-		<div id="title-bar" class="drag-window">
-			<div id="title-bar-content">
-				Comment Keeper
-			</div>
+		<div style="display: flex; position: absolute; width: 100%; background: var(--color_3); z-index: 1; width: 100%;">
+			<input id="patterns" type="text" 
+			placeholder="Comma Separated Patterns To Search" 
+			title="Comma Separated Patterns To Search" 
+			style="flex: 1; margin: 10px;"></input>
+			<button id="add_folder_button" style="flex: 0 0 150px; margin: 10px 10px 10px 0;">
+				Add Project
+			</button>
 		</div>
-		
-		<div id="body-container">
-		
-			<div id="project-folder-container">
-				<div id="project-folder-label-div">
-					<p id="project-folder-label">
-						Project Folder:
-					</p>
-				</div>
-				<input id="project-folder-input" readonly="true">
-					<div id="project-folder-browse-div">
-						<button id="project-folder-browse">
-							Browse
-						</button>
-					</div>
-					<div id="project-folder-refresh-div">
-						<button id="project-folder-refresh">
-							Refresh
-						</button>
-					</div>
-				</input>
-			</div>
-			
-			<div id="comment-tree-div">
-				
-				<ul id="comment-tree-ul">
-				</ul>
-				
-			</div>
-			
-			<div id="comment-tree-no-comments-note">
-					
-				No comments found! :)
-				
-			</div>
-			
-			<div id="invalid-project-folder-note">
-				
-				Project Folder value is invalid
-				
-			</div>
-		
-		</div>
-		
-		<script src="./app.js"></script>
+		<div id="root" style="margin-top: 57px;"></div>
 	</body>
-
+	<script src="./app.js"></script>
 </html>
