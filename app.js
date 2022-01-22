@@ -7,6 +7,7 @@
 var app = new function () {
     var open_folders = new Map();
     var comment_record = new Map(); //TODO seems like it doesn't want to be viewable by client vs server??
+    var file_delim = window.process.platform() === "win32" ? "\\" : "/";
 
     //TODO: create a ipc object to house those functions -- maybe refactor receive to "on"
     //TODO: create a fs object to house those functions
@@ -115,16 +116,26 @@ var app = new function () {
             window.ipc.send("grepFolderSend", {pattern: patterns[i], folder: folder});
     }
     
-    function grepFolderReceive(folder, results) {
-        refreshFolderResults(folder, results);
+    function grepFolderReceive(results) {
+        refreshFolderResults(results);
     }
     
     //-------------------------------------------------------------------------
 
+    //format on windows: "C:\path\filename.ext:79:   // TODO: add summary comments"
+
     function processLine(line, projectFolder) {
-        var colon_index = line.indexOf(":");
+
+        var colon_index = -1;
+        if (window.process.platform() === "win32") {
+            colon_index = line.indexOf(":", 2); //skip the "C:" colon
+        }
+        else {
+            colon_index = line.indexOf(":");
+        }
+
         var path = line.substr(0, colon_index).substr(projectFolder.length + 1);
-        var path_array = path.split("/");
+        var path_array = path_array = path.split(file_delim);
 
         var line_num_index = line.indexOf(":", colon_index + 1);
         var line_num = line.substr(
@@ -133,7 +144,7 @@ var app = new function () {
         );
         var comment = line.substr(line_num_index + 1).trim();
 
-        return {
+        var processed_line = {
             line: line,
             folder: projectFolder,
             path: path,
@@ -141,6 +152,8 @@ var app = new function () {
             line_num: line_num,
             comment: comment,
         };
+
+        return processed_line;
     }
 
     function addToTree(line, projectFolder) {
@@ -201,7 +214,7 @@ var app = new function () {
 
         function createId(prefix, record, index) {
             var id = prefix + record.folder;
-            for (var j=0; j<=index; j++) id += "/" + record.path_array[j];
+            for (var j=0; j<=index; j++) id += file_delim + record.path_array[j];
             return id;
         }
 

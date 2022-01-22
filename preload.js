@@ -7,6 +7,7 @@
 
 const { contextBridge, ipcRenderer } = require("electron");
 const fs = require("fs");
+const process = require("process");
 
 contextBridge.exposeInMainWorld("ipc", {
 	send: function (channel, data) {
@@ -27,5 +28,11 @@ contextBridge.exposeInMainWorld("ipc", {
 contextBridge.exposeInMainWorld("fs", {
 	existsSync: function (path) {
 		return fs.existsSync(path);
+	}
+});
+
+contextBridge.exposeInMainWorld("process", {
+	platform: function() {
+		return process.platform;
 	}
 });

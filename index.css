@@ -13,6 +13,8 @@
     --color_3: #222222;
 }
 
+::-webkit-scrollbar{width: 0px;}
+
 * {
     padding: 0;
     margin: 0;

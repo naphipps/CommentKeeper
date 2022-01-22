@@ -6,7 +6,8 @@
 
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
-const process = require("child_process");
+const child_process = require("child_process");
+const process = require("process");
 const fs = require("fs");
 
 let w;
@@ -24,8 +25,9 @@ async function createWindow() {
 		},
 	});
 
+	w.removeMenu();
 	w.loadFile("index.html");
-	//w.webContents.openDevTools();
+	w.webContents.openDevTools();
 }
 
 app.on("ready", createWindow);
@@ -43,21 +45,24 @@ app.on("activate", function () {
 ipcMain.on("grepFolderSend", function (event, arg) {
 	var pattern = arg.pattern;
 	var folder = arg.folder;
-
 	var grep = null;
-	try {
-		if (pattern !== null && pattern !== "") {
-			grep = process.execSync('grep -rn "' + pattern + '" "' + folder + '"');//TODO: make this async
-		}
-	} catch (e) {
-		grep = null;
+	var command = null;
+
+	function callback(error, stdout, stderr) {
+		grep = String(stdout);
+		w.webContents.send("grepFolderReceive", {pattern: pattern, folder: folder, grep: grep});
 	}
 
-	w.webContents.send("grepFolderReceive", {
-		pattern: pattern,
-		folder: folder,
-		grep: grep === null ? "" : new TextDecoder("utf-8").decode(grep),
-	});
+	if (pattern !== null && pattern !== "") {
+		if (process.platform === "win32") {
+			command = 'findstr /s /n ' + pattern + ' "' + folder + '\\*"';
+		}
+		else if (process.platform === "darwin") {
+			command = 'grep -rn "' + pattern + '" "' + folder + '"';
+		}
+	}
+
+	if (command) child_process.exec(command, null, callback);
 });
 
 ipcMain.on("openFolderSend", function (event, arg) {
