@@ -27,7 +27,7 @@ async function createWindow() {
 
 	w.removeMenu();
 	w.loadFile("index.html");
-	w.webContents.openDevTools();
+	//w.webContents.openDevTools();
 }
 
 app.on("ready", createWindow);
