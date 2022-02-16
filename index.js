@@ -57,7 +57,7 @@ ipcMain.on("grepFolderSend", function (event, arg) {
 		if (process.platform === "win32") {
 			command = 'findstr /s /n ' + pattern + ' "' + folder + '\\*"';
 		}
-		else if (process.platform === "darwin") {
+		else if (process.platform === "darwin" || process.platform === "linux") {
 			command = 'grep -rn "' + pattern + '" "' + folder + '"';
 		}
 	}
