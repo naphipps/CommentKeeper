@@ -8,10 +8,7 @@ var app = new function () {
     var open_folders = new Map();
     var comment_record = new Map(); //TODO seems like it doesn't want to be viewable by client vs server??
     var file_delim = window.process.platform() === "win32" ? "\\" : "/";
-
-    //TODO: create a ipc object to house those functions -- maybe refactor receive to "on"
-    //TODO: create a fs object to house those functions
-
+    
     function byId(id) {
         return document.getElementById(id);
     }
@@ -95,8 +92,6 @@ var app = new function () {
             close_button.innerText = "X";
             bar.appendChild(close_button);
             
-            //TODO: add close button along bar
-            
             var results = createElement("div");
             results.id = "results_" + folder;
             results.classList.add("folder_results");
@@ -154,8 +149,6 @@ var app = new function () {
     }
     
     //-------------------------------------------------------------------------
-
-    //format on windows: "C:\path\filename.ext:79:   // TODO: add summary comments"
 
     function processLine(line, projectFolder) {
 
