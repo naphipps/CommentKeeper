@@ -35,24 +35,24 @@ var app = new function () {
     function rememberFolder(folder) {
         var folders = [];
         var stored_folders = window.localStorage.getItem("open_folders");
-        if (stored_folders !== null) folders = stored_folders.split(":");
+        if (stored_folders !== null) folders = stored_folders.split("`");
 
         var index = folders.indexOf(folder);
         if (index === -1) folders.push(folder);
         
-        window.localStorage.setItem("open_folders", folders.join(":"));
+        window.localStorage.setItem("open_folders", folders.join("`"));
     }
 
     function forgetFolder(folder) {
         var folders = [];
         var stored_folders = window.localStorage.getItem("open_folders");
-        if (stored_folders !== null) folders = stored_folders.split(":");
+        if (stored_folders !== null) folders = stored_folders.split("`");
 
         var index = folders.indexOf(folder);
         if (index !== -1) folders.splice(index, 1);
 
         if (folders.length > 0) {
-            window.localStorage.setItem("open_folders", folders.join(":"));
+            window.localStorage.setItem("open_folders", folders.join("`"));
         }
         else {
             window.localStorage.removeItem("open_folders");
@@ -117,7 +117,7 @@ var app = new function () {
         window.ipc.receive("grepFolderReceive", grepFolderReceive);
 
         var stored_folders = window.localStorage.getItem("open_folders");
-        if (stored_folders !== null) openFolderReceive(stored_folders.split(":"));
+        if (stored_folders !== null) openFolderReceive(stored_folders.split("`"));
         
         setInterval(refresh, 1000 * 5);
     }
