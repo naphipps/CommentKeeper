@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-packager ./ --out=./build --icon=./icon.icns --prune=true --overwrite CommentKeeper"
+    "start": "electron ./src",
+    "build": "electron-packager ./ --out=./build --icon=./img/icon.icns --prune=true --overwrite CommentKeeper"
   },
   "author": "",
   "license": "ISC",

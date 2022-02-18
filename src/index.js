@@ -4,6 +4,8 @@
 //
 //##===----------------------------------------------------------------------===##//
 
+//TODO: move all src to a src folder
+
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const child_process = require("child_process");
