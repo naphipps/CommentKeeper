@@ -4,6 +4,8 @@
 //
 //##===----------------------------------------------------------------------===##//
 
+//TODO: sort folders alphabetically on root level
+
 var app = new function () {
     var open_folders = new Map();
     var comment_record = new Map(); //TODO seems like it doesn't want to be viewable by client vs server??
